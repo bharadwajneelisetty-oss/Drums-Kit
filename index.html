@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drums Kit</title>
+  </head>
+  <style>
+    h1 {
+      color: azure;
+      font-size: 60px;
+      font-style: oblique;
+      text-shadow: 3px 0 red;
+    }
+    .set {
+      margin: 10% auto;
+    }
+    footer {
+      text-align: center;
+    }
+    body {
+      background-color: rgb(186, 119, 248);
+      text-align: center;
+    }
+    .q {
+      background-image: url("images/tom1.png");
+    }
+    .w {
+      background-image: url("images/tom2.png");
+    }
+    .e {
+      background-image: url("images/tom3.png");
+    }
+    .r {
+      background-image: url("images/tom4.png");
+    }
+    .t {
+      background-image: url("images/snare.png");
+    }
+    .y {
+      background-image: url("images/crash.png");
+    }
+    .u {
+      background-image: url("images/kick.png");
+    }
+    .drum {
+      width: 130px;
+      height: 130px;
+      font-size: 5rem;
+      font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+      line-height: 2;
+      font-weight: 900;
+      color: rgb(148, 8, 8);
+      border-radius: 15px;
+      text-align: center;
+      text-shadow: 3px rgb(57, 48, 48);
+      margin: 10px;
+    }
+    .pressed {
+      box-shadow: 0 0 20px white;
+      opacity: 0.5;
+      transform: scale(0.9);
+      transition: 0.1s;
+    }
+  </style>
+  <body>
+    <h1>Drums 🥁 kit</h1>
+    <div class="set">
+      <button class="q drum">q</button>
+      <button class="w drum">w</button>
+      <button class="e drum">e</button>
+      <button class="r drum">r</button>
+      <button class="t drum">t</button>
+      <button class="y drum">y</button>
+      <button class="u drum">u</button>
+    </div>
+    <footer>Music 🎶 ❤️❤️</footer>
+    <script>
+      let numberOfButtons = document.querySelectorAll(".drum").length;
+      for (let i = 0; i < numberOfButtons; i++) {
+        document
+          .querySelectorAll(".drum")
+          [i].addEventListener("click", function () {
+            let buttonInnerHtml = this.innerHTML;
+            playsound(buttonInnerHtml);
+            buttonAnimation(buttonInnerHtml);
+          });
+      }
+      document.addEventListener("keypress", function (event) {
+        playsound(event.key);
+        buttonAnimation(event.key);
+      });
+
+      function playsound(key) {
+        switch (key) {
+          case "q":
+            new Audio("audio/tom-1.mp3").play();
+            break;
+          case "w":
+            new Audio("audio/tom-2.mp3").play();
+            break;
+          case "e":
+            new Audio("audio/tom-3.mp3").play();
+            break;
+          case "r":
+            new Audio("audio/tom-4.mp3").play();
+            break;
+          case "t":
+            new Audio("audio/snare.mp3").play();
+            break;
+          case "y":
+            new Audio("audio/crash.mp3").play();
+            break;
+          case "u":
+            new Audio("audio/kick-bass.mp3").play();
+            break;
+          default:
+            console.log("audio/Unknown key:", key);
+        }
+      }
+
+      function buttonAnimation(currentKey) {
+        let activeButton = document.querySelector("." + currentKey);
+        activeButton.classList.add("pressed");
+
+        setTimeout(function () {
+          activeButton.classList.remove("pressed");
+        }, 100);
+      }
+    </script>
+  </body>
+</html>
